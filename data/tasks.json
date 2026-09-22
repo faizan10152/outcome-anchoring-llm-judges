@@ -1,0 +1,515 @@
+[
+  {
+    "task_id": "K001",
+    "prompt": "Please process the expense reimbursement for Anna Weber's trip to Paris. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E001",
+    "employee_name": "Anna Weber",
+    "trip_id": "T001",
+    "destination": "Paris",
+    "scenario": "alcohol",
+    "binding_rules": [
+      "R1"
+    ],
+    "oracle_amount_eur": 270.91,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K002",
+    "prompt": "Anna Weber has come back from Zurich (project kickoff) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E001",
+    "employee_name": "Anna Weber",
+    "trip_id": "T002",
+    "destination": "Zurich",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 302.82,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K003",
+    "prompt": "We need to settle Anna Weber's Cologne trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E001",
+    "employee_name": "Anna Weber",
+    "trip_id": "T003",
+    "destination": "Cologne",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 297.11,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K004",
+    "prompt": "Handle the reimbursement claim for the Brussels trip by Bernd Schulz. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E002",
+    "employee_name": "Bernd Schulz",
+    "trip_id": "T004",
+    "destination": "Brussels",
+    "scenario": "taxi_no_receipt",
+    "binding_rules": [
+      "R2"
+    ],
+    "oracle_amount_eur": 262.98,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K005",
+    "prompt": "Finance is waiting on Bernd Schulz's Copenhagen trip (trade fair). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E002",
+    "employee_name": "Bernd Schulz",
+    "trip_id": "T005",
+    "destination": "Copenhagen",
+    "scenario": "taxi_and_threshold",
+    "binding_rules": [
+      "R2",
+      "R3"
+    ],
+    "oracle_amount_eur": 301.13,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K006",
+    "prompt": "Please process the expense reimbursement for Bernd Schulz's trip to Amsterdam. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E002",
+    "employee_name": "Bernd Schulz",
+    "trip_id": "T006",
+    "destination": "Amsterdam",
+    "scenario": "taxi_no_receipt",
+    "binding_rules": [
+      "R2"
+    ],
+    "oracle_amount_eur": 224.92,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K007",
+    "prompt": "Clara Hoffmann has come back from Berlin (project kickoff) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E003",
+    "employee_name": "Clara Hoffmann",
+    "trip_id": "T007",
+    "destination": "Berlin",
+    "scenario": "all_rules",
+    "binding_rules": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "oracle_amount_eur": 237.93,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K008",
+    "prompt": "We need to settle Clara Hoffmann's Copenhagen trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E003",
+    "employee_name": "Clara Hoffmann",
+    "trip_id": "T008",
+    "destination": "Copenhagen",
+    "scenario": "alcohol",
+    "binding_rules": [
+      "R1"
+    ],
+    "oracle_amount_eur": 423.36,
+    "n_expenses": 10
+  },
+  {
+    "task_id": "K009",
+    "prompt": "Handle the reimbursement claim for the Munich trip by Clara Hoffmann. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E003",
+    "employee_name": "Clara Hoffmann",
+    "trip_id": "T009",
+    "destination": "Munich",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 289.91,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K010",
+    "prompt": "Finance is waiting on David Krause's Munich trip (conference). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E004",
+    "employee_name": "David Krause",
+    "trip_id": "T010",
+    "destination": "Munich",
+    "scenario": "over_threshold_no_receipt",
+    "binding_rules": [
+      "R3"
+    ],
+    "oracle_amount_eur": 286.28,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K011",
+    "prompt": "Please process the expense reimbursement for David Krause's trip to Paris. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E004",
+    "employee_name": "David Krause",
+    "trip_id": "T011",
+    "destination": "Paris",
+    "scenario": "alcohol_and_cap",
+    "binding_rules": [
+      "R1",
+      "R4"
+    ],
+    "oracle_amount_eur": 256.59,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K012",
+    "prompt": "David Krause has come back from Zurich (trade fair) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E004",
+    "employee_name": "David Krause",
+    "trip_id": "T012",
+    "destination": "Zurich",
+    "scenario": "taxi_and_threshold",
+    "binding_rules": [
+      "R2",
+      "R3"
+    ],
+    "oracle_amount_eur": 465.48,
+    "n_expenses": 11
+  },
+  {
+    "task_id": "K013",
+    "prompt": "We need to settle Elena Fischer's Zurich trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E005",
+    "employee_name": "Elena Fischer",
+    "trip_id": "T013",
+    "destination": "Zurich",
+    "scenario": "over_threshold_no_receipt",
+    "binding_rules": [
+      "R3"
+    ],
+    "oracle_amount_eur": 427.97,
+    "n_expenses": 11
+  },
+  {
+    "task_id": "K014",
+    "prompt": "Handle the reimbursement claim for the Amsterdam trip by Elena Fischer. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E005",
+    "employee_name": "Elena Fischer",
+    "trip_id": "T014",
+    "destination": "Amsterdam",
+    "scenario": "taxi_no_receipt",
+    "binding_rules": [
+      "R2"
+    ],
+    "oracle_amount_eur": 300.34,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K015",
+    "prompt": "Finance is waiting on Elena Fischer's Prague trip (client meeting). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E005",
+    "employee_name": "Elena Fischer",
+    "trip_id": "T015",
+    "destination": "Prague",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 357.81,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K016",
+    "prompt": "Please process the expense reimbursement for Felix Braun's trip to Berlin. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E006",
+    "employee_name": "Felix Braun",
+    "trip_id": "T016",
+    "destination": "Berlin",
+    "scenario": "clean",
+    "binding_rules": [],
+    "oracle_amount_eur": 275.85,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K017",
+    "prompt": "Felix Braun has come back from Zurich (supplier audit) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E006",
+    "employee_name": "Felix Braun",
+    "trip_id": "T017",
+    "destination": "Zurich",
+    "scenario": "taxi_and_threshold",
+    "binding_rules": [
+      "R2",
+      "R3"
+    ],
+    "oracle_amount_eur": 286.05,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K018",
+    "prompt": "We need to settle Felix Braun's Cologne trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E006",
+    "employee_name": "Felix Braun",
+    "trip_id": "T018",
+    "destination": "Cologne",
+    "scenario": "all_rules",
+    "binding_rules": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "oracle_amount_eur": 297.49,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K019",
+    "prompt": "Handle the reimbursement claim for the Paris trip by Greta Lange. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E007",
+    "employee_name": "Greta Lange",
+    "trip_id": "T019",
+    "destination": "Paris",
+    "scenario": "alcohol_and_cap",
+    "binding_rules": [
+      "R1",
+      "R4"
+    ],
+    "oracle_amount_eur": 259.29,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K020",
+    "prompt": "Finance is waiting on Greta Lange's Frankfurt trip (trade fair). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E007",
+    "employee_name": "Greta Lange",
+    "trip_id": "T020",
+    "destination": "Frankfurt",
+    "scenario": "alcohol_and_cap",
+    "binding_rules": [
+      "R1",
+      "R4"
+    ],
+    "oracle_amount_eur": 294.48,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K021",
+    "prompt": "Please process the expense reimbursement for Greta Lange's trip to Brussels. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E007",
+    "employee_name": "Greta Lange",
+    "trip_id": "T021",
+    "destination": "Brussels",
+    "scenario": "taxi_no_receipt",
+    "binding_rules": [
+      "R2"
+    ],
+    "oracle_amount_eur": 431.56,
+    "n_expenses": 10
+  },
+  {
+    "task_id": "K022",
+    "prompt": "Hannes Vogt has come back from Zurich (supplier audit) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E008",
+    "employee_name": "Hannes Vogt",
+    "trip_id": "T022",
+    "destination": "Zurich",
+    "scenario": "taxi_no_receipt",
+    "binding_rules": [
+      "R2"
+    ],
+    "oracle_amount_eur": 430.44,
+    "n_expenses": 11
+  },
+  {
+    "task_id": "K023",
+    "prompt": "We need to settle Hannes Vogt's Prague trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E008",
+    "employee_name": "Hannes Vogt",
+    "trip_id": "T023",
+    "destination": "Prague",
+    "scenario": "over_threshold_no_receipt",
+    "binding_rules": [
+      "R3"
+    ],
+    "oracle_amount_eur": 277.36,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K024",
+    "prompt": "Handle the reimbursement claim for the Paris trip by Hannes Vogt. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E008",
+    "employee_name": "Hannes Vogt",
+    "trip_id": "T024",
+    "destination": "Paris",
+    "scenario": "alcohol",
+    "binding_rules": [
+      "R1"
+    ],
+    "oracle_amount_eur": 264.47,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K025",
+    "prompt": "Finance is waiting on Irina Sommer's Berlin trip (client meeting). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E009",
+    "employee_name": "Irina Sommer",
+    "trip_id": "T025",
+    "destination": "Berlin",
+    "scenario": "alcohol_and_cap",
+    "binding_rules": [
+      "R1",
+      "R4"
+    ],
+    "oracle_amount_eur": 277.42,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K026",
+    "prompt": "Please process the expense reimbursement for Irina Sommer's trip to Frankfurt. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E009",
+    "employee_name": "Irina Sommer",
+    "trip_id": "T026",
+    "destination": "Frankfurt",
+    "scenario": "clean",
+    "binding_rules": [],
+    "oracle_amount_eur": 440.16,
+    "n_expenses": 10
+  },
+  {
+    "task_id": "K027",
+    "prompt": "Irina Sommer has come back from Cologne (client meeting) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E009",
+    "employee_name": "Irina Sommer",
+    "trip_id": "T027",
+    "destination": "Cologne",
+    "scenario": "clean",
+    "binding_rules": [],
+    "oracle_amount_eur": 304.21,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K028",
+    "prompt": "We need to settle Jonas Keller's Paris trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E010",
+    "employee_name": "Jonas Keller",
+    "trip_id": "T028",
+    "destination": "Paris",
+    "scenario": "over_threshold_no_receipt",
+    "binding_rules": [
+      "R3"
+    ],
+    "oracle_amount_eur": 223.49,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K029",
+    "prompt": "Handle the reimbursement claim for the Berlin trip by Jonas Keller. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E010",
+    "employee_name": "Jonas Keller",
+    "trip_id": "T029",
+    "destination": "Berlin",
+    "scenario": "all_rules",
+    "binding_rules": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "oracle_amount_eur": 278.23,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K030",
+    "prompt": "Finance is waiting on Jonas Keller's Prague trip (supplier audit). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E010",
+    "employee_name": "Jonas Keller",
+    "trip_id": "T030",
+    "destination": "Prague",
+    "scenario": "alcohol",
+    "binding_rules": [
+      "R1"
+    ],
+    "oracle_amount_eur": 312.42,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K031",
+    "prompt": "Please process the expense reimbursement for Katrin Busch's trip to Amsterdam. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E011",
+    "employee_name": "Katrin Busch",
+    "trip_id": "T031",
+    "destination": "Amsterdam",
+    "scenario": "over_threshold_no_receipt",
+    "binding_rules": [
+      "R3"
+    ],
+    "oracle_amount_eur": 397.99,
+    "n_expenses": 11
+  },
+  {
+    "task_id": "K032",
+    "prompt": "Katrin Busch has come back from Cologne (conference) and filed expenses. Check them against the policy and submit the reimbursable total.",
+    "employee_id": "E011",
+    "employee_name": "Katrin Busch",
+    "trip_id": "T032",
+    "destination": "Cologne",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 339.29,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K033",
+    "prompt": "We need to settle Katrin Busch's Paris trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
+    "employee_id": "E011",
+    "employee_name": "Katrin Busch",
+    "trip_id": "T033",
+    "destination": "Paris",
+    "scenario": "clean",
+    "binding_rules": [],
+    "oracle_amount_eur": 495.62,
+    "n_expenses": 10
+  },
+  {
+    "task_id": "K034",
+    "prompt": "Handle the reimbursement claim for the Hamburg trip by Lukas Mertens. Apply the current expense policy and submit the final amount.",
+    "employee_id": "E012",
+    "employee_name": "Lukas Mertens",
+    "trip_id": "T034",
+    "destination": "Hamburg",
+    "scenario": "taxi_and_threshold",
+    "binding_rules": [
+      "R2",
+      "R3"
+    ],
+    "oracle_amount_eur": 254.82,
+    "n_expenses": 8
+  },
+  {
+    "task_id": "K035",
+    "prompt": "Finance is waiting on Lukas Mertens's Berlin trip (team workshop). Please review the submitted expenses against the policy and submit what we owe.",
+    "employee_id": "E012",
+    "employee_name": "Lukas Mertens",
+    "trip_id": "T035",
+    "destination": "Berlin",
+    "scenario": "meal_cap",
+    "binding_rules": [
+      "R4"
+    ],
+    "oracle_amount_eur": 289.33,
+    "n_expenses": 7
+  },
+  {
+    "task_id": "K036",
+    "prompt": "Please process the expense reimbursement for Lukas Mertens's trip to Paris. Work out the total amount we can reimburse under the current policy and submit it.",
+    "employee_id": "E012",
+    "employee_name": "Lukas Mertens",
+    "trip_id": "T036",
+    "destination": "Paris",
+    "scenario": "alcohol",
+    "binding_rules": [
+      "R1"
+    ],
+    "oracle_amount_eur": 295.56,
+    "n_expenses": 8
+  }
+]

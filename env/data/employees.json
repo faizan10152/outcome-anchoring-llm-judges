@@ -1,0 +1,62 @@
+[
+  {
+    "employee_id": "E001",
+    "name": "Anna Weber",
+    "department": "Engineering"
+  },
+  {
+    "employee_id": "E002",
+    "name": "Bernd Schulz",
+    "department": "Sales"
+  },
+  {
+    "employee_id": "E003",
+    "name": "Clara Hoffmann",
+    "department": "Marketing"
+  },
+  {
+    "employee_id": "E004",
+    "name": "David Krause",
+    "department": "Engineering"
+  },
+  {
+    "employee_id": "E005",
+    "name": "Elena Fischer",
+    "department": "Finance"
+  },
+  {
+    "employee_id": "E006",
+    "name": "Felix Braun",
+    "department": "Sales"
+  },
+  {
+    "employee_id": "E007",
+    "name": "Greta Lange",
+    "department": "Legal"
+  },
+  {
+    "employee_id": "E008",
+    "name": "Hannes Vogt",
+    "department": "Engineering"
+  },
+  {
+    "employee_id": "E009",
+    "name": "Irina Sommer",
+    "department": "Marketing"
+  },
+  {
+    "employee_id": "E010",
+    "name": "Jonas Keller",
+    "department": "Finance"
+  },
+  {
+    "employee_id": "E011",
+    "name": "Katrin Busch",
+    "department": "Legal"
+  },
+  {
+    "employee_id": "E012",
+    "name": "Lukas Mertens",
+    "department": "Sales"
+  }
+]

@@ -1,0 +1,21 @@
+# Course material (copyrighted slides — not for a public repo)
+course_material/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Secrets
+.env
+*.key
+
+# OS
+.DS_Store
+
+# Poster working files (large binaries)
+poster/*.png
+poster/*.tiff

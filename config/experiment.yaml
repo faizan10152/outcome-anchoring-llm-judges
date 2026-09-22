@@ -1,0 +1,89 @@
+# Experiment configuration: outcome anchoring in LLM judges of agent traces.
+# Everything that defines a run lives here so results can be reproduced.
+
+experiment:
+  name: outcome-anchoring-expense-traces
+  seed: 20260922
+
+paths:
+  env_data: env/data
+  tasks: data/tasks.json
+  traces_clean: data/traces/clean
+  traces_failed: data/traces/failed
+  traces_faulty: data/traces/faulty
+  judgments: results/judgments.jsonl
+  figures: results/figures
+
+# --- agent that produces the traces -----------------------------------
+# NOTE: model choice is still open (see README "Open decisions"). The values
+# below are the local-inference default; a clean-trace yield of roughly 30 of
+# 36 tasks is what the design needs.
+agent:
+  backend: ollama              # ollama | openai_compatible
+  base_url: http://localhost:11434
+  model: qwen3:14b
+  temperature: 0.0
+  seed: 7
+  max_steps: 16                # tool-call rounds before the episode is cut off
+  num_ctx: 16384
+
+# --- judges ------------------------------------------------------------
+# Three models across three families and two size bands, so a result is not
+# an artefact of one model lineage.
+judges:
+  backend: ollama
+  base_url: http://localhost:11434
+  temperature: 0.0
+  seed: 7
+  models:
+    - id: qwen2.5-7b
+      name: qwen2.5:7b
+      family: qwen
+      params_b: 7
+      available: true
+    - id: qwen3-14b
+      name: qwen3:14b
+      family: qwen
+      params_b: 14
+      available: true
+    - id: llama3.1-8b
+      name: llama3.1:8b
+      family: llama
+      params_b: 8
+      available: true
+
+  readouts:                     # the moderator condition for H3
+    - direct                    # yes/no only
+    - reason_then_verdict       # explain first, then "Verdict: Yes|No"
+  localize: true                # ask for the faulty step index in the reason condition
+
+# --- fault injection ---------------------------------------------------
+faults:
+  one_fault_per_trace: true
+  types:
+    - id: F1
+      name: fabricated_observation
+      description: >
+        The agent's text states a value the tool never returned (e.g. a meal
+        cap of 50 EUR when get_policy returned 40 EUR).
+    - id: F2
+      name: phantom_action
+      description: >
+        A tool call and its result are deleted while the agent's claim to have
+        performed it is kept.
+    - id: F3
+      name: skipped_check
+      description: >
+        A required lookup (call + result) is deleted; the agent applies the
+        rule anyway, with no claim that it checked.
+  outcome_versions: [correct, wrong]   # matched pair: differs only in final lines
+  wrong_amount_strategy: counterfactual  # the amount the fault itself implies
+  include_clean_wrong_control: true      # clean trace, wrong total (sanity check)
+
+# --- analysis ----------------------------------------------------------
+analysis:
+  primary_metric: anchoring_gap        # detection(outcome-wrong) - detection(outcome-correct)
+  paired_test: mcnemar                 # matched pairs share a trace
+  bootstrap_resamples: 10000
+  ci_level: 0.95
+  figure_dpi: 300                      # poster needs >= 150 PPI

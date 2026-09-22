@@ -1,0 +1,18 @@
+{
+  "policy_version": "1.0",
+  "currency": "EUR",
+  "rules": {
+    "alcohol_reimbursable": false,
+    "taxi_requires_receipt": true,
+    "receipt_required_above_eur": 25.0,
+    "meal_daily_cap_eur": 40.0
+  },
+  "expense_categories": ["meal", "taxi", "hotel", "train", "other"],
+  "rule_text": [
+    "R1 (alcohol): Alcohol is never reimbursable. If an expense item includes alcohol, the alcohol portion is deducted and only the remainder may be reimbursed.",
+    "R2 (taxi receipt): Taxi expenses are reimbursed only if a receipt was submitted. Without a receipt the taxi expense is reimbursed at 0.00 EUR, regardless of amount.",
+    "R3 (receipt threshold): Any expense with a charged amount strictly above 25.00 EUR requires a receipt. Without a receipt it is reimbursed at 0.00 EUR. The threshold is applied to the full charged amount, before any alcohol deduction.",
+    "R4 (meal cap): Reimbursable meal expenses are capped at 40.00 EUR per calendar day. The cap applies to the sum of the eligible meal amounts on that date, after R1-R3 have been applied.",
+    "R5 (order of application): Rules are applied in the order R1, R2, R3, R4. Amounts are computed in whole cents and the final total is reported with two decimals."
+  ]
+}

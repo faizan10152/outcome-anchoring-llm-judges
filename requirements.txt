@@ -1,0 +1,14 @@
+# Environment, agent and judge runs
+pyyaml>=6.0
+requests>=2.31
+tqdm>=4.66
+
+# Analysis and figures
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+statsmodels>=0.14
+matplotlib>=3.8
+
+# Tests
+pytest>=8.0
