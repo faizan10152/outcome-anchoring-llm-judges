@@ -123,3 +123,12 @@ tests/                   hand-computed oracle checks, tool checks
   with the correct total, which is an extra cue and makes detection *easier* in that
   condition — i.e. it biases against H1 and makes the test conservative. This is
   accepted and reported as a limitation.
+
+## Licence
+
+Released under the MIT Licence — see [LICENSE](LICENSE). The code, the generated
+environment and the traces may be reused freely, including to replicate or extend
+these experiments.
+
+The employee names, trips and expense items in `env/data/` are synthetic, produced
+by `env/generate_data.py` from a fixed seed. They describe no real person.
