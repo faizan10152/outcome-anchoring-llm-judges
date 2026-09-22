@@ -75,6 +75,9 @@ each fault itself implies, rather than an arbitrary wrong number.
 ## Reproducing
 
 ```bash
+git clone https://github.com/faizan10152/outcome-anchoring-llm-judges.git
+cd outcome-anchoring-llm-judges
+
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
