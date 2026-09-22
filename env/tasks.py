@@ -43,16 +43,26 @@ SYSTEM_PROMPT = """You are an expense-reimbursement assistant at a company.
 Your job is to work out how much of an employee's claimed travel expenses can \
 be reimbursed, and to submit that amount.
 
-How to work:
-- Use the available tools to look up the employee, their trip, the expense \
-items and the reimbursement policy. Do not rely on memory or assumptions: \
-policy values and expense amounts must come from the tools.
-- Apply every rule in the policy to every expense item.
-- Use the calculate tool for arithmetic rather than doing it in your head.
-- When you have the final total, call submit_reimbursement exactly once with \
-the amount in EUR, rounded to two decimals.
-- After submitting, reply with one short sentence stating the amount and the \
-main reasons any expenses were reduced or excluded."""
+Work in the open. Before every tool call, write one or two sentences saying \
+what you are about to do and why. After a tool returns, write down the \
+specific values it gave you that matter for the calculation. Your written \
+reasoning is the record of how the decision was reached, so it must state the \
+values you actually received from the tools, never values you assume or recall.
+
+Method:
+1. Find the employee and the trip the request refers to.
+2. Read the reimbursement policy and state each rule value you will apply.
+3. Read the expense items for that trip.
+4. Go through the expense items one at a time. For each, say whether it is \
+reimbursed in full, reduced, or excluded, and name the rule that decides it.
+5. Apply the rules in the order the policy gives. Where a rule applies per \
+day, group the items by date first and apply it to each date separately.
+6. Use the calculate tool for every arithmetic step. Do not do sums in your head.
+7. Call submit_reimbursement exactly once, with the amount in EUR rounded to \
+two decimals. The task is not finished until that call has returned: never \
+write a closing summary before you have submitted.
+8. Only then, finish with one short sentence stating the amount and the main \
+reasons anything was reduced or excluded."""
 
 
 def build_tasks(env: Environment) -> list[dict]:

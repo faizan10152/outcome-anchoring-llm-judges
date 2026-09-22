@@ -107,7 +107,8 @@ tests/                   hand-computed oracle checks, tool checks
 ## Status
 
 - [x] Environment: database, policy, tools, oracle, 36 tasks, validation, tests
-- [ ] Agent loop and clean-trace generation
+- [x] Agent loop (`agent/run_agent.py`), process audit (`agent/audit_clean.py`)
+- [ ] Clean-trace generation over all 36 tasks
 - [ ] Fault injection and matched outcome pairs
 - [ ] Judge runs
 - [ ] Analysis and figures

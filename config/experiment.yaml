@@ -24,7 +24,7 @@ agent:
   model: qwen3:14b
   temperature: 0.0
   seed: 7
-  max_steps: 16                # tool-call rounds before the episode is cut off
+  max_steps: 24                # tool-call rounds; item-by-item review needs headroom
   num_ctx: 16384
 
 # --- judges ------------------------------------------------------------
