@@ -1,7 +1,7 @@
 {
-  "trace_id": "K002-qwen3-14b",
-  "task_id": "K002",
-  "task_prompt": "Anna Weber has come back from Zurich (project kickoff) and filed expenses. Check them against the policy and submit the reimbursable total.",
+  "trace_id": "K028-qwen3-14b",
+  "task_id": "K028",
+  "task_prompt": "We need to settle Jonas Keller's Paris trip. Determine how much of the claimed expenses is reimbursable and submit that amount.",
   "messages": [
     {
       "role": "system",
@@ -9,14 +9,14 @@
     },
     {
       "role": "user",
-      "content": "Anna Weber has come back from Zurich (project kickoff) and filed expenses. Check them against the policy and submit the reimbursable total."
+      "content": "We need to settle Jonas Keller's Paris trip. Determine how much of the claimed expenses is reimbursable and submit that amount."
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_y7wbfsiy",
+          "id": "call_nm7x8u9k",
           "type": "function",
           "function": {
             "name": "list_employees",
@@ -27,7 +27,7 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_y7wbfsiy",
+      "tool_call_id": "call_nm7x8u9k",
       "name": "list_employees",
       "content": "[{\"employee_id\": \"E001\", \"name\": \"Anna Weber\", \"department\": \"Engineering\"}, {\"employee_id\": \"E002\", \"name\": \"Bernd Schulz\", \"department\": \"Sales\"}, {\"employee_id\": \"E003\", \"name\": \"Clara Hoffmann\", \"department\": \"Marketing\"}, {\"employee_id\": \"E004\", \"name\": \"David Krause\", \"department\": \"Engineering\"}, {\"employee_id\": \"E005\", \"name\": \"Elena Fischer\", \"department\": \"Finance\"}, {\"employee_id\": \"E006\", \"name\": \"Felix Braun\", \"department\": \"Sales\"}, {\"employee_id\": \"E007\", \"name\": \"Greta Lange\", \"department\": \"Legal\"}, {\"employee_id\": \"E008\", \"name\": \"Hannes Vogt\", \"department\": \"Engineering\"}, {\"employee_id\": \"E009\", \"name\": \"Irina Sommer\", \"department\": \"Marketing\"}, {\"employee_id\": \"E010\", \"name\": \"Jonas Keller\", \"department\": \"Finance\"}, {\"employee_id\": \"E011\", \"name\": \"Katrin Busch\", \"department\": \"Legal\"}, {\"employee_id\": \"E012\", \"name\": \"Lukas Mertens\", \"department\": \"Sales\"}]"
     },
@@ -36,12 +36,12 @@
       "content": "",
       "tool_calls": [
         {
-          "id": "call_flji5255",
+          "id": "call_6t29du73",
           "type": "function",
           "function": {
             "name": "get_employee",
             "arguments": {
-              "employee_id": "E001"
+              "employee_id": "E010"
             }
           }
         }
@@ -49,16 +49,16 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_flji5255",
+      "tool_call_id": "call_6t29du73",
       "name": "get_employee",
-      "content": "{\"employee_id\": \"E001\", \"name\": \"Anna Weber\", \"department\": \"Engineering\", \"trips\": [{\"trip_id\": \"T001\", \"destination\": \"Paris\", \"purpose\": \"Client meeting\", \"start_date\": \"2026-04-02\", \"end_date\": \"2026-04-03\"}, {\"trip_id\": \"T002\", \"destination\": \"Zurich\", \"purpose\": \"Project kickoff\", \"start_date\": \"2026-03-09\", \"end_date\": \"2026-03-10\"}, {\"trip_id\": \"T003\", \"destination\": \"Cologne\", \"purpose\": \"Client meeting\", \"start_date\": \"2026-04-15\", \"end_date\": \"2026-04-16\"}]}"
+      "content": "{\"employee_id\": \"E010\", \"name\": \"Jonas Keller\", \"department\": \"Finance\", \"trips\": [{\"trip_id\": \"T028\", \"destination\": \"Paris\", \"purpose\": \"Project kickoff\", \"start_date\": \"2026-03-15\", \"end_date\": \"2026-03-16\"}, {\"trip_id\": \"T029\", \"destination\": \"Berlin\", \"purpose\": \"Trade fair\", \"start_date\": \"2026-04-07\", \"end_date\": \"2026-04-08\"}, {\"trip_id\": \"T030\", \"destination\": \"Prague\", \"purpose\": \"Supplier audit\", \"start_date\": \"2026-04-06\", \"end_date\": \"2026-04-07\"}]}"
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_mn4q6o97",
+          "id": "call_mf350ejg",
           "type": "function",
           "function": {
             "name": "get_policy",
@@ -69,7 +69,7 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_mn4q6o97",
+      "tool_call_id": "call_mf350ejg",
       "name": "get_policy",
       "content": "{\"policy_version\": \"1.0\", \"currency\": \"EUR\", \"rules\": {\"alcohol_reimbursable\": false, \"taxi_requires_receipt\": true, \"receipt_required_above_eur\": 25.0, \"meal_daily_cap_eur\": 40.0}, \"rule_text\": [\"R1 (alcohol): Alcohol is never reimbursable. If an expense item includes alcohol, the alcohol portion is deducted and only the remainder may be reimbursed.\", \"R2 (taxi receipt): Taxi expenses are reimbursed only if a receipt was submitted. Without a receipt the taxi expense is reimbursed at 0.00 EUR, regardless of amount.\", \"R3 (receipt threshold): Any expense with a charged amount strictly above 25.00 EUR requires a receipt. Without a receipt it is reimbursed at 0.00 EUR. The threshold is applied to the full charged amount, before any alcohol deduction.\", \"R4 (meal cap): Reimbursable meal expenses are capped at 40.00 EUR per calendar day. The cap applies to the sum of the eligible meal amounts on that date, after R1-R3 have been applied.\", \"R5 (order of application): Rules are applied in the order R1, R2, R3, R4. Amounts are computed in whole cents and the final total is reported with two decimals.\"]}"
     },
@@ -78,13 +78,13 @@
       "content": "",
       "tool_calls": [
         {
-          "id": "call_carolahn",
+          "id": "call_62c9ipnj",
           "type": "function",
           "function": {
             "name": "get_expenses",
             "arguments": {
-              "employee_id": "E001",
-              "trip_id": "T002"
+              "employee_id": "E010",
+              "trip_id": "T028"
             }
           }
         }
@@ -92,9 +92,9 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_carolahn",
+      "tool_call_id": "call_62c9ipnj",
       "name": "get_expenses",
-      "content": "[{\"expense_id\": \"T002-E01\", \"date\": \"2026-03-09\", \"category\": \"train\", \"description\": \"Train ticket (return)\", \"amount_eur\": 113.72, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E02\", \"date\": \"2026-03-09\", \"category\": \"hotel\", \"description\": \"Hotel night 1\", \"amount_eur\": 95.11, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E03\", \"date\": \"2026-03-09\", \"category\": \"meal\", \"description\": \"Breakfast in transit\", \"amount_eur\": 19.55, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E04\", \"date\": \"2026-03-09\", \"category\": \"meal\", \"description\": \"Lunch in transit\", \"amount_eur\": 35.23, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E05\", \"date\": \"2026-03-10\", \"category\": \"meal\", \"description\": \"Breakfast\", \"amount_eur\": 8.43, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E06\", \"date\": \"2026-03-10\", \"category\": \"meal\", \"description\": \"Lunch\", \"amount_eur\": 12.23, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E07\", \"date\": \"2026-03-09\", \"category\": \"taxi\", \"description\": \"Taxi from station to hotel\", \"amount_eur\": 21.12, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T002-E08\", \"date\": \"2026-03-10\", \"category\": \"other\", \"description\": \"Printing / stationery\", \"amount_eur\": 12.21, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": false}]"
+      "content": "[{\"expense_id\": \"T028-E01\", \"date\": \"2026-03-15\", \"category\": \"train\", \"description\": \"Train ticket (return)\", \"amount_eur\": 47.94, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E02\", \"date\": \"2026-03-15\", \"category\": \"hotel\", \"description\": \"Hotel night 1\", \"amount_eur\": 100.47, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E03\", \"date\": \"2026-03-15\", \"category\": \"meal\", \"description\": \"Breakfast in transit\", \"amount_eur\": 11.67, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E04\", \"date\": \"2026-03-15\", \"category\": \"meal\", \"description\": \"Lunch in transit\", \"amount_eur\": 19.29, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E05\", \"date\": \"2026-03-16\", \"category\": \"meal\", \"description\": \"Breakfast\", \"amount_eur\": 11.87, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E06\", \"date\": \"2026-03-16\", \"category\": \"meal\", \"description\": \"Lunch\", \"amount_eur\": 14.78, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E07\", \"date\": \"2026-03-15\", \"category\": \"taxi\", \"description\": \"Taxi from station to hotel\", \"amount_eur\": 17.47, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": true}, {\"expense_id\": \"T028-E08\", \"date\": \"2026-03-16\", \"category\": \"other\", \"description\": \"Conference materials\", \"amount_eur\": 38.63, \"alcohol_amount_eur\": 0.0, \"receipt_submitted\": false}]"
     },
     {
       "role": "user",
@@ -102,19 +102,19 @@
     },
     {
       "role": "assistant",
-      "content": "I will now analyze each expense item for Anna Weber's trip to Zurich (project kickoff) to determine whether it is reimbursed in full, reduced, or excluded based on the company's reimbursement policy.\n\n1. **Expense ID: T002-E01**\n   - **Date:** 2026-03-09\n   - **Category:** train\n   - **Charged Amount (EUR):** 113.72\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** No specific rule applies to train tickets. Since this is not a category specifically restricted by the policy and no other rule applies, it is fully reimbursable.\n\n2. **Expense ID: T002-E02**\n   - **Date:** 2026-03-09\n   - **Category:** hotel\n   - **Charged Amount (EUR):** 95.11\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** No specific rule applies to hotel expenses. Since this is not a category specifically restricted by the policy and no other rule applies, it is fully reimbursable.\n\n3. **Expense ID: T002-E03**\n   - **Date:** 2026-03-09\n   - **Category:** meal\n   - **Charged Amount (EUR):** 19.55\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** R3 (receipt threshold): The expense is below the 25.00 EUR threshold and a receipt was submitted, so it is fully reimbursable.\n\n4. **Expense ID: T002-E04**\n   - **Date:** 2026-03-09\n   - **Category:** meal\n   - **Charged Amount (EUR):** 35.23\n   - **Reimbursement Status:** Reduced\n   - **Policy Rule:** R4 (meal cap): The meal cap is 40.00 EUR per calendar day. This item is below the cap and a receipt was submitted, so it is fully reimbursable. However, since the total of all meals on this date will be capped at 40.00 EUR, the reimbursement for this specific item will depend on the sum of all eligible meals for that day.\n\n5. **Expense ID: T002-E05**\n   - **Date:** 2026-03-10\n   - **Category:** meal\n   - **Charged Amount (EUR):** 8.43\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** R3 (receipt threshold): The expense is below the 25.00 EUR threshold and a receipt was submitted, so it is fully reimbursable.\n\n6. **Expense ID: T002-E06**\n   - **Date:** 2026-03-10\n   - **Category:** meal\n   - **Charged Amount (EUR):** 12.23\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** R3 (receipt threshold): The expense is below the 25.00 EUR threshold and a receipt was submitted, so it is fully reimbursable.\n\n7. **Expense ID: T002-E07**\n   - **Date:** 2026-03-09\n   - **Category:** taxi\n   - **Charged Amount (EUR):** 21.12\n   - **Reimbursement Status:** Reimbursed in full\n   - **Policy Rule:** R2 (taxi receipt): A receipt was submitted, so the full amount is reimbursable.\n\n8. **Expense ID: T002-E08**\n   - **Date:** 2026-03-10\n   - **Category:** other\n   - **Charged Amount (EUR):** 12.21\n   - **Reimbursement Status:** Excluded\n   - **Policy Rule:** R3 (receipt threshold): The expense is below the 25.00 EUR threshold but no receipt was submitted, so it is excluded from reimbursement.\n\nNow, I will calculate the total amount that can be reimbursed, taking into account the rules and any reductions or exclusions."
+      "content": "I will now analyze each expense item for Jonas Keller's Paris trip (trip_id: T028) and determine whether it is reimbursed in full, reduced, or excluded based on the reimbursement policy.\n\n1. **Expense ID: T028-E01**  \n   - **Date:** 2026-03-15  \n   - **Category:** train  \n   - **Charged amount:** 47.94 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to train expenses. This is fully reimbursable.\n\n2. **Expense ID: T028-E02**  \n   - **Date:** 2026-03-15  \n   - **Category:** hotel  \n   - **Charged amount:** 70.47 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to hotel expenses. This is fully reimbursable.\n\n3. **Expense ID: T028-E03**  \n   - **Date:** 2026-03-15  \n   - **Category:** meal  \n   - **Charged amount:** 11.67 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to this meal expense. This is fully reimbursable.\n\n4. **Expense ID: T028-E04**  \n   - **Date:** 2026-03-15  \n   - **Category:** meal  \n   - **Charged amount:** 19.29 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to this meal expense. This is fully reimbursable.\n\n5. **Expense ID: T028-E05**  \n   - **Date:** 2026-03-16  \n   - **Category:** meal  \n   - **Charged amount:** 11.87 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to this meal expense. This is fully reimbursable.\n\n6. **Expense ID: T028-E06**  \n   - **Date:** 2026-03-16  \n   - **Category:** meal  \n   - **Charged amount:** 14.78 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** No rule applies to this meal expense. This is fully reimbursable.\n\n7. **Expense ID: T028-E07**  \n   - **Date:** 2026-03-15  \n   - **Category:** taxi  \n   - **Charged amount:** 17.47 EUR  \n   - **Reimbursement status:** Reimbursed in full  \n   - **Policy rule:** Rule R2 (taxi receipt): A receipt was submitted, so this is fully reimbursable.\n\n8. **Expense ID: T028-E08**  \n   - **Date:** 2026-03-16  \n   - **Category:** other  \n   - **Charged amount:** 38.63 EUR  \n   - **Reimbursement status:** Excluded  \n   - **Policy rule:** Rule R3 (receipt threshold): This expense is above 25.00 EUR and no receipt was submitted, so it is excluded from reimbursement.\n\nNow that I have analyzed all the expense items, I will proceed to calculate the total reimbursable amount."
     },
     {
       "role": "assistant",
-      "content": " I will use the `calculate` tool for this.\n",
+      "content": " I will use the `calculate` tool for each arithmetic step to ensure accuracy.\n",
       "tool_calls": [
         {
-          "id": "call_hj280oqj",
+          "id": "call_3uwvt561",
           "type": "function",
           "function": {
             "name": "calculate",
             "arguments": {
-              "expression": "113.72 + 95.11 + 19.55 + 35.23 + 8.43 + 12.23 + 21.12"
+              "expression": "47.94 + 100.47 + 11.67 + 19.29 + 11.87 + 14.78 + 17.47"
             }
           }
         }
@@ -122,23 +122,23 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_hj280oqj",
+      "tool_call_id": "call_3uwvt561",
       "name": "calculate",
-      "content": "{\"expression\": \"113.72 + 95.11 + 19.55 + 35.23 + 8.43 + 12.23 + 21.12\", \"result\": 305.39}"
+      "content": "{\"expression\": \"47.94 + 100.47 + 11.67 + 19.29 + 11.87 + 14.78 + 17.47\", \"result\": 223.49}"
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_adqou7gk",
+          "id": "call_pct2nbmh",
           "type": "function",
           "function": {
             "name": "submit_reimbursement",
             "arguments": {
-              "amount_eur": 305.39,
-              "employee_id": "E001",
-              "trip_id": "T002"
+              "employee_id": "E010",
+              "trip_id": "T028",
+              "amount_eur": 223.49
             }
           }
         }
@@ -146,13 +146,13 @@
     },
     {
       "role": "tool",
-      "tool_call_id": "call_adqou7gk",
+      "tool_call_id": "call_pct2nbmh",
       "name": "submit_reimbursement",
-      "content": "{\"status\": \"submitted\", \"employee_id\": \"E001\", \"trip_id\": \"T002\", \"amount_eur\": 305.39, \"message\": \"Reimbursement of 305.39 EUR recorded for T002.\"}"
+      "content": "{\"status\": \"submitted\", \"employee_id\": \"E010\", \"trip_id\": \"T028\", \"amount_eur\": 223.49, \"message\": \"Reimbursement of 223.49 EUR recorded for T028.\"}"
     },
     {
       "role": "assistant",
-      "content": "The reimbursable total for Anna Weber's trip to Zurich (project kickoff) is 305.39 EUR. All expenses were reimbursed in full except for the \"Printing / stationery\" expense, which was excluded due to the lack of a receipt."
+      "content": "The reimbursable amount for Jonas Keller's Paris trip (T028) is 223.49 EUR. All expenses were reimbursed in full except for the \"Conference materials\" expense, which was excluded due to the lack of a receipt and the amount exceeding the 25.00 EUR threshold."
     }
   ],
   "tool_call_log": [
@@ -225,33 +225,33 @@
     {
       "tool": "get_employee",
       "arguments": {
-        "employee_id": "E001"
+        "employee_id": "E010"
       },
       "result": {
-        "employee_id": "E001",
-        "name": "Anna Weber",
-        "department": "Engineering",
+        "employee_id": "E010",
+        "name": "Jonas Keller",
+        "department": "Finance",
         "trips": [
           {
-            "trip_id": "T001",
+            "trip_id": "T028",
             "destination": "Paris",
-            "purpose": "Client meeting",
-            "start_date": "2026-04-02",
-            "end_date": "2026-04-03"
-          },
-          {
-            "trip_id": "T002",
-            "destination": "Zurich",
             "purpose": "Project kickoff",
-            "start_date": "2026-03-09",
-            "end_date": "2026-03-10"
+            "start_date": "2026-03-15",
+            "end_date": "2026-03-16"
           },
           {
-            "trip_id": "T003",
-            "destination": "Cologne",
-            "purpose": "Client meeting",
-            "start_date": "2026-04-15",
-            "end_date": "2026-04-16"
+            "trip_id": "T029",
+            "destination": "Berlin",
+            "purpose": "Trade fair",
+            "start_date": "2026-04-07",
+            "end_date": "2026-04-08"
+          },
+          {
+            "trip_id": "T030",
+            "destination": "Prague",
+            "purpose": "Supplier audit",
+            "start_date": "2026-04-06",
+            "end_date": "2026-04-07"
           }
         ]
       }
@@ -280,79 +280,79 @@
     {
       "tool": "get_expenses",
       "arguments": {
-        "employee_id": "E001",
-        "trip_id": "T002"
+        "employee_id": "E010",
+        "trip_id": "T028"
       },
       "result": [
         {
-          "expense_id": "T002-E01",
-          "date": "2026-03-09",
+          "expense_id": "T028-E01",
+          "date": "2026-03-15",
           "category": "train",
           "description": "Train ticket (return)",
-          "amount_eur": 113.72,
+          "amount_eur": 47.94,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E02",
-          "date": "2026-03-09",
+          "expense_id": "T028-E02",
+          "date": "2026-03-15",
           "category": "hotel",
           "description": "Hotel night 1",
-          "amount_eur": 95.11,
+          "amount_eur": 100.47,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E03",
-          "date": "2026-03-09",
+          "expense_id": "T028-E03",
+          "date": "2026-03-15",
           "category": "meal",
           "description": "Breakfast in transit",
-          "amount_eur": 19.55,
+          "amount_eur": 11.67,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E04",
-          "date": "2026-03-09",
+          "expense_id": "T028-E04",
+          "date": "2026-03-15",
           "category": "meal",
           "description": "Lunch in transit",
-          "amount_eur": 35.23,
+          "amount_eur": 19.29,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E05",
-          "date": "2026-03-10",
+          "expense_id": "T028-E05",
+          "date": "2026-03-16",
           "category": "meal",
           "description": "Breakfast",
-          "amount_eur": 8.43,
+          "amount_eur": 11.87,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E06",
-          "date": "2026-03-10",
+          "expense_id": "T028-E06",
+          "date": "2026-03-16",
           "category": "meal",
           "description": "Lunch",
-          "amount_eur": 12.23,
+          "amount_eur": 14.78,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E07",
-          "date": "2026-03-09",
+          "expense_id": "T028-E07",
+          "date": "2026-03-15",
           "category": "taxi",
           "description": "Taxi from station to hotel",
-          "amount_eur": 21.12,
+          "amount_eur": 17.47,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": true
         },
         {
-          "expense_id": "T002-E08",
-          "date": "2026-03-10",
+          "expense_id": "T028-E08",
+          "date": "2026-03-16",
           "category": "other",
-          "description": "Printing / stationery",
-          "amount_eur": 12.21,
+          "description": "Conference materials",
+          "amount_eur": 38.63,
           "alcohol_amount_eur": 0.0,
           "receipt_submitted": false
         }
@@ -361,61 +361,73 @@
     {
       "tool": "calculate",
       "arguments": {
-        "expression": "113.72 + 95.11 + 19.55 + 35.23 + 8.43 + 12.23 + 21.12"
+        "expression": "47.94 + 100.47 + 11.67 + 19.29 + 11.87 + 14.78 + 17.47"
       },
       "result": {
-        "expression": "113.72 + 95.11 + 19.55 + 35.23 + 8.43 + 12.23 + 21.12",
-        "result": 305.39
+        "expression": "47.94 + 100.47 + 11.67 + 19.29 + 11.87 + 14.78 + 17.47",
+        "result": 223.49
       }
     },
     {
       "tool": "submit_reimbursement",
       "arguments": {
-        "amount_eur": 305.39,
-        "employee_id": "E001",
-        "trip_id": "T002"
+        "employee_id": "E010",
+        "trip_id": "T028",
+        "amount_eur": 223.49
       },
       "result": {
         "status": "submitted",
-        "employee_id": "E001",
-        "trip_id": "T002",
-        "amount_eur": 305.39,
-        "message": "Reimbursement of 305.39 EUR recorded for T002."
+        "employee_id": "E010",
+        "trip_id": "T028",
+        "amount_eur": 223.49,
+        "message": "Reimbursement of 223.49 EUR recorded for T028."
       }
     }
   ],
   "meta": {
-    "employee_id": "E001",
-    "trip_id": "T002",
-    "scenario": "meal_cap",
+    "employee_id": "E010",
+    "trip_id": "T028",
+    "scenario": "over_threshold_no_receipt",
     "binding_rules": [
-      "R4"
+      "R3"
     ],
-    "oracle_amount_eur": 302.82,
-    "submitted_amount_eur": 305.39,
-    "outcome_correct": false,
+    "oracle_amount_eur": 223.49,
+    "submitted_amount_eur": 223.49,
+    "outcome_correct": true,
     "stop_reason": "final_message",
     "assistant_turns": 8,
     "tool_calls": 6,
     "submit_calls": 1,
     "narrated_tool_turns": 1,
-    "narration_chars": 3326,
+    "narration_chars": 2790,
     "submit_reminders": 0,
     "forced_analysis": true,
     "model_emitted_thinking": false,
     "agent": {
       "backend": "ollama",
       "model": "qwen3:14b",
-      "temperature": 0.8,
-      "seed": 10,
+      "temperature": 0.0,
+      "seed": 7,
       "num_ctx": 16384,
       "think": false
     },
-    "wall_time_s": 3365.5,
-    "generated_at": "2026-09-26T15:44:40+00:00",
+    "wall_time_s": 104.17,
+    "generated_at": "2026-09-22T19:31:36+00:00",
     "audit_problems": [],
-    "usable": false,
-    "attempt_index": 4,
-    "attempts_made": 4
+    "usable": true,
+    "attempt_index": 1,
+    "attempts_made": 1
+  },
+  "injection": {
+    "fault_type": "F1",
+    "fault_step_index": 11,
+    "target": "T028-E02",
+    "original": "Charged amount:** 100.47 EUR",
+    "edited": "Charged amount:** 70.47 EUR",
+    "basis": "charged 100.47 stated as 70.47",
+    "outcome_version": "correct",
+    "submitted_amount_eur": 223.49,
+    "oracle_amount_eur": 223.49,
+    "messages_removed": 0
   }
 }

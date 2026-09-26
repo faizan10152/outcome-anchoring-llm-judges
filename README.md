@@ -108,10 +108,32 @@ tests/                   hand-computed oracle checks, tool checks
 
 - [x] Environment: database, policy, tools, oracle, 36 tasks, validation, tests
 - [x] Agent loop (`agent/run_agent.py`), process audit (`agent/audit_clean.py`)
-- [ ] Clean-trace generation over all 36 tasks
-- [ ] Fault injection and matched outcome pairs
+- [x] Clean traces: 17 of 36 tasks (42% first-pass yield, all audit-clean)
+- [x] Fault injection and matched pairs: 42 pairs (14 per fault type) + 17 controls
 - [ ] Judge runs
 - [ ] Analysis and figures
+
+## Trace set
+
+| | |
+|---|---|
+| Clean traces | 17 (15 at temperature 0; 2 resampled at 0.8 — see below) |
+| Matched pairs | 42 = 14 traces x 3 fault types |
+| Clean controls | 17 |
+| **Total traces judged** | **101** |
+
+`faults/verify_pairs.py` checks the invariant the design rests on: within a pair,
+every message before the closing lines is byte-identical, both members carry the
+same fault at the same step, and the agent's `calculate` results still match what
+the real tool returns for the (edited) expressions. Divergence begins within the
+last 5 messages of every pair.
+
+**Generation procedure.** All 36 tasks were first run at temperature 0. Tasks that
+produced no audit-clean trace were then resampled at temperature 0.8, because at
+temperature 0 a different seed barely changes the trajectory — no task was ever
+rescued by a reseeded retry. Resampling was stopped once the pair count was
+sufficient, so 2 of the 17 clean traces were generated at 0.8; each trace records
+its own decoding settings in `meta.agent`.
 
 ## Open decisions
 

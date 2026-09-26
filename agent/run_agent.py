@@ -216,6 +216,13 @@ def main() -> int:
     ap.add_argument("--attempts", type=int, default=1,
                     help="retries per task, each with a different seed, until the "
                          "submitted amount matches the oracle (default 1)")
+    ap.add_argument("--temperature", type=float,
+                    help="override the configured decoding temperature. Seed-only "
+                         "resampling is ineffective at temperature 0, so retries of "
+                         "a failed task need this above 0 to explore at all")
+    ap.add_argument("--only-missing", action="store_true",
+                    help="run only tasks that have no usable trace yet, ignoring "
+                         "any existing failed trace for them")
     ap.add_argument("--think", choices=["on", "off"], default="off",
                     help="allow a model's separate reasoning channel (default off)")
     args = ap.parse_args()
@@ -236,7 +243,8 @@ def main() -> int:
     client = OllamaClient(
         model=args.model,
         base_url=cfg["agent"]["base_url"],
-        temperature=cfg["agent"]["temperature"],
+        temperature=(args.temperature if args.temperature is not None
+                     else cfg["agent"]["temperature"]),
         seed=cfg["agent"]["seed"],
         num_ctx=cfg["agent"]["num_ctx"],
         think=False if args.think == "off" else None,
@@ -253,8 +261,12 @@ def main() -> int:
     n_clean = n_failed = n_skipped = n_first = n_audit_rejects = 0
     for task in tasks:
         name = f"{task['task_id']}-{slug}.json"
-        if not args.overwrite and ((clean_dir / name).exists()
-                                   or (failed_dir / name).exists()):
+        if args.only_missing:
+            if (clean_dir / name).exists():
+                n_skipped += 1
+                continue
+        elif not args.overwrite and ((clean_dir / name).exists()
+                                     or (failed_dir / name).exists()):
             n_skipped += 1
             continue
 
