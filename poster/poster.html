@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Outcome Anchoring in LLM Judges of Agent Traces</title>
+<style>
+  @page { size: 841mm 594mm; margin: 0; }
+  :root{
+    --ink:#0b0b0b; --ink2:#3f3e3c; --ink3:#6b6a65; --rule:#d8d7d2;
+    --surface:#fcfcfb; --panel:#f4f3ef; --blue:#2a78d6; --orange:#eb6834;
+    --red:#e34948; --deep:#184f95;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; min-width:0; }
+  img,svg{ max-width:100%; width:100%; height:auto; display:block; }
+  html,body{ width:841mm; height:594mm; }
+  body{
+    background:var(--surface); color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:24pt; line-height:1.29; padding:12mm 15mm 9mm;
+    display:flex; flex-direction:column; gap:5mm; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- header ---------- */
+  header{ display:flex; align-items:flex-end; gap:12mm;
+          border-bottom:1.2mm solid var(--ink); padding-bottom:2.8mm; }
+  header .main{ flex:1; }
+  h1{ font-size:44pt; line-height:1.02; letter-spacing:-0.4pt; font-weight:800; }
+  h1 .q{ color:var(--deep); }
+  .sub{ font-size:23pt; color:var(--ink2); margin-top:2.6mm; max-width:560mm; }
+  .meta{ text-align:right; font-size:20pt; color:var(--ink2); line-height:1.5; white-space:nowrap; }
+  .meta b{ color:var(--ink); font-size:23pt; }
+  .repo{ font-family:"SF Mono",Menlo,Consolas,monospace; font-size:18.5pt; color:var(--deep); }
+  /* ---------- structure ---------- */
+  .upper{ display:grid; grid-template-columns:256mm minmax(0,1fr); gap:10mm; height:233mm; }
+  section{ display:flex; flex-direction:column; min-height:0; min-width:0; overflow:hidden; }
+  h2{ font-size:29pt; font-weight:800; letter-spacing:.2pt; margin-bottom:3.5mm;
+      padding-bottom:1.6mm; border-bottom:0.8mm solid var(--ink); }
+  h2 .n{ color:var(--deep); margin-right:2.5mm; }
+  h3{ font-size:24pt; font-weight:750; margin:3mm 0 1.4mm; }
+  p{ margin-bottom:2.2mm; }
+  .lead{ font-size:24pt; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:6.2mm; margin-bottom:1.8mm; }
+  li::before{ content:""; position:absolute; left:0; top:3.4mm;
+              width:2.6mm; height:2.6mm; border-radius:50%; background:var(--blue); }
+  .muted{ color:var(--ink2); }
+  .small{ font-size:24pt; line-height:1.26; color:var(--ink2); }
+  .hyp{ background:var(--panel); border-left:2.2mm solid var(--blue);
+        padding:1.8mm 3.2mm; margin-bottom:1.3mm; }
+  .hyp b{ color:var(--deep); }
+  .verdict{ display:inline-block; font-size:20pt; font-weight:800; letter-spacing:.4pt;
+            padding:0.7mm 2.4mm; border-radius:1.2mm; margin-left:2mm;
+            background:var(--red); color:#fff; vertical-align:2pt; }
+  .cite{ color:var(--deep); font-weight:600; }
+  /* ---------- methodology ---------- */
+  .methodgrid{ display:grid; grid-template-columns:minmax(0,1fr) 228mm; gap:8mm; flex:1; min-height:0; }
+  .pairfig{ width:100%; }
+  table{ border-collapse:collapse; width:100%; font-size:22pt; }
+  th,td{ text-align:left; padding:1.5mm 2mm; border-bottom:0.35mm solid var(--rule); }
+  th{ font-weight:750; color:var(--ink2); font-size:20pt; }
+  td.num{ font-variant-numeric:tabular-nums; font-weight:700; }
+  /* ---------- results ---------- */
+  .findings{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6mm; margin-bottom:3.5mm; }
+  .card{ background:var(--panel); padding:2.2mm 3mm; border-top:1.2mm solid var(--deep); }
+  .card .big{ font-size:29pt; font-weight:800; line-height:1.04; color:var(--deep); }
+  .card .lbl{ font-size:21pt; color:var(--ink2); margin-top:1.4mm; line-height:1.26; }
+  .figrow{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6mm; align-items:start; }
+  .figrow > div{ min-width:0; overflow:hidden; }
+  .methodgrid > div{ min-width:0; overflow:hidden; }
+  .figrow img{ width:100%; display:block; }
+  .cap{ font-size:21pt; color:var(--ink2); line-height:1.28; margin-top:1.2mm; }
+  .cap b{ color:var(--ink); }
+  .callout{ background:var(--panel); border-top:1.2mm solid var(--orange);
+            padding:3mm 3.4mm; margin-top:3.5mm; }
+  .ct{ font-size:22pt; font-weight:800; margin-bottom:1.6mm; }
+  table.iv th{ font-size:20pt; } table.iv td{ font-size:21.5pt; }
+  td.neg{ color:var(--red); }
+  footer{ border-top:0.8mm solid var(--rule); padding-top:2.6mm;
+          display:grid; grid-template-columns:1.45fr minmax(0,1fr); gap:9mm; font-size:24pt; line-height:1.24;
+          color:var(--ink2); }
+  footer b{ color:var(--ink); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="main">
+    <h1>Do LLM judges of agent traces check the <span class="q">process</span>,<br>or only the <span class="q">outcome</span>?</h1>
+    <p class="sub">A matched-pair experiment: the same trace, the same injected fault, differing only in whether the final answer is right.</p>
+  </div>
+  <div class="meta">
+    <b>Faizan</b><br>
+    Trends in NLP · Univ. Trier<br>
+    <span class="repo">github.com/faizan10152/<br>outcome-anchoring-llm-judges</span>
+  </div>
+</header>
+
+<div class="upper">
+  <!-- ============ 1. HYPOTHESIS ============ -->
+  <section>
+    <h2><span class="n">1</span>Hypothesis</h2>
+    <p class="lead">LLM judges grade agents, and increasingly train them as reward signals. A judge scoring the <b>final answer</b> rather than the <b>process</b> rewards agents that fake their steps but land on the right number.</p>
+    <p><b>RQ.</b> Do judges detect process faults regardless of the final outcome — or are they <i>outcome-anchored</i>?</p>
+
+    <div class="hyp"><b>H1 anchoring.</b> Detection is lower when the final outcome is correct. <span class="verdict">NOT SUPPORTED</span></div>
+    <div class="hyp"><b>H2 fault type.</b> Fabricated values and phantom actions are missed more than skipped checks. <span class="verdict">CONTRADICTED</span></div>
+    <div class="hyp"><b>H3 reasoning.</b> Reason-then-verdict shrinks the gap. <span class="verdict">NOT SUPPORTED</span></div>
+
+    <h3 style="margin:1.4mm 0 0.8mm">Where this sits</h3>
+    <ul class="small">
+      <li><span class="cite">TRAIL</span> (Deshpande+ 2025), <span class="cite">AgentRewardBench</span> (Lù+ 2025): judges miss agent errors, but compare <i>different</i> traces — cause not isolated.</li>
+      <li><span class="cite">Lightman+ 2023</span>: process vs outcome supervision. <b>This work</b> adds the counterfactual pair.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 2. METHODOLOGY ============ -->
+  <section>
+    <h2><span class="n">2</span>Methodology</h2>
+    <div class="methodgrid">
+      <div>
+        <p><b>Environment.</b> Expense reimbursement: the outcome is one number, so correct/wrong is unambiguous. 12 employees, 36 trips, 299 expense items, 4 policy rules, 6 deterministic tools. A Python <b>oracle</b> gives the true total.</p>
+        <p><b>Traces.</b> A ReAct agent (Qwen3 14B) must reason in the open. A trace is kept only if its total matches the oracle <i>and</i> it passes a <b>process audit</b>: one run hit the oracle exactly while its four <code>calculate</code> calls held no arithmetic at all.</p>
+        <p><b>Faults</b> — one per trace, at a recorded step:</p>
+        <table>
+          <tr><td><b>F1</b></td><td>fabricated value — states an amount no tool returned</td></tr>
+          <tr><td><b>F2</b></td><td>phantom action — lookup deleted, its claims kept</td></tr>
+          <tr><td><b>F3</b></td><td>skipped check — policy never read, rules still applied</td></tr>
+        </table>
+        <p style="margin-top:2.4mm"><b>Judges.</b> 3 models × 2 readouts (direct Yes/No; reason-then-verdict) over 101 traces = <b>606 judgements</b>, temperature 0. Judges never see the oracle.</p>
+        <p><b>42 matched pairs</b> (14 per fault type) + 17 clean controls. A check verifies each pair is byte-identical before its closing lines, and that edited <code>calculate</code> calls still return what the real tool returns.</p>
+      </div>
+      <div>
+        <svg class="pairfig" viewBox="0 0 470 238" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Matched pair: identical traces differing only in the final submitted total">
+          <style>
+            .lbl{font:600 12.5px Helvetica,Arial,sans-serif;fill:#3f3e3c}
+            .stp{font:11.5px Helvetica,Arial,sans-serif;fill:#0b0b0b}
+            .fau{font:700 11.5px Helvetica,Arial,sans-serif;fill:#e34948}
+            .hd{font:800 13px Helvetica,Arial,sans-serif;fill:#fcfcfb}
+            .amt{font:800 15px Helvetica,Arial,sans-serif;fill:#fcfcfb}
+            .note{font:11.5px Helvetica,Arial,sans-serif;fill:#6b6a65}
+          </style>
+          <text x="0" y="11" class="lbl">One faulty trace → two versions</text>
+          <g>
+            <rect x="0" y="22" width="222" height="150" rx="4" fill="#f4f3ef" stroke="#d8d7d2"/>
+            <rect x="240" y="22" width="222" height="150" rx="4" fill="#f4f3ef" stroke="#d8d7d2"/>
+            <text x="12" y="42" class="stp">1  get_policy → cap €40</text>
+            <text x="252" y="42" class="stp">1  get_policy → cap €40</text>
+            <text x="12" y="62" class="stp">2  get_expenses → …</text>
+            <text x="252" y="62" class="stp">2  get_expenses → …</text>
+            <text x="12" y="84" class="fau">3  “charged €95.76”</text>
+            <text x="252" y="84" class="fau">3  “charged €95.76”</text>
+            <text x="12" y="100" class="note">   tool returned €125.76</text>
+            <text x="252" y="100" class="note">   tool returned €125.76</text>
+            <text x="12" y="122" class="stp">4  calculate → …</text>
+            <text x="252" y="122" class="stp">4  calculate → …</text>
+            <rect x="8" y="132" width="206" height="32" rx="3" fill="#2a78d6"/>
+            <rect x="248" y="132" width="206" height="32" rx="3" fill="#eb6834"/>
+            <text x="18" y="153" class="hd">5  submit</text>
+            <text x="258" y="153" class="hd">5  submit</text>
+            <text x="205" y="154" class="amt" text-anchor="end">€423.36 ✓</text>
+            <text x="445" y="154" class="amt" text-anchor="end">€393.36 ✗</text>
+          </g>
+          <text x="0" y="192" class="lbl">outcome CORRECT</text>
+          <text x="240" y="192" class="lbl">outcome WRONG</text>
+          <text x="0" y="214" class="note">Identical up to step 4 — same fault, same step.</text>
+          <text x="0" y="230" class="note">Only the final total differs, so any detection gap is caused by the outcome.</text>
+        </svg>
+        <div class="callout">
+          <div class="ct">Instrument validation</div>
+          <table class="iv">
+            <tr><th>judge prompt</th><th>faulty</th><th>clean</th><th>discrim.</th></tr>
+            <tr><td>names what to check</td><td class="num">79%</td><td class="num">82%</td><td class="num neg">−4</td></tr>
+            <tr><td>neutral (used here)</td><td class="num">51%</td><td class="num">47%</td><td class="num">+4</td></tr>
+          </table>
+          <p class="cap" style="margin-top:1.6mm">One sentence naming what to look for destroys discrimination. <b>Detection without a clean-trace control cannot tell a judge from a rubber stamp.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 3. RESULTS ============ -->
+<section style="flex:1 1 auto; min-height:0;">
+  <h2><span class="n">3</span>Results</h2>
+
+  <div class="findings">
+    <div class="card"><div class="big">≤ +15 pts</div><div class="lbl">best discrimination of any judge (detection − false positives)</div></div>
+    <div class="card"><div class="big">+3 / +4 pts</div><div class="lbl">anchoring gap, direct / reasoning — 5 of 6 CIs include zero</div></div>
+    <div class="card"><div class="big">34%</div><div class="lbl">skipped checks (F3) detected — the <i>least</i> caught fault, reversing H2</div></div>
+    <div class="card"><div class="big">0% → 76%</div><div class="lbl">Llama 3.1 false positives, direct → reasoning: readout flips disposition</div></div>
+  </div>
+
+  <div class="figrow">
+    <div>
+      <img src="../results/figures/fig1_discrimination.png" alt="Detection versus false positives per judge and readout">
+      <p class="cap"><b>Judges do not verify.</b> Llama 3.1 (direct) accepted all 101 traces; Qwen3 14B flagged 96% of faults <i>and</i> 82% of clean ones.</p>
+    </div>
+    <div>
+      <img src="../results/figures/fig2_fault_outcome.png" alt="Detection rate by fault type and outcome">
+      <p class="cap"><b>Outcome barely moves detection.</b> Within a pair, trace and fault are identical. Columns shift little; rows differ enormously.</p>
+    </div>
+    <div>
+      <img src="../results/figures/fig3_anchoring_gap.png" alt="Anchoring gap with bootstrap confidence intervals">
+      <p class="cap"><b>H1 not supported.</b> Small gaps, disagreeing in sign. McNemar p &gt; 0.12 throughout; 39% of detected faults localised to ±1 step.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><b>Conclusion.</b> Outcome anchoring is not the mechanism — the absence of verification is. What a judge reports is driven by model-specific response bias and prompt wording, not by the fault.</div>
+  <div><b>Limitations.</b> 42 pairs per cell: intervals are wide, so a modest gap cannot be excluded — only a large one. Judges are 7–14B open models, not frontier systems. Agent yield was 17/36.</div>
+</footer>
+
+</body>
+</html>

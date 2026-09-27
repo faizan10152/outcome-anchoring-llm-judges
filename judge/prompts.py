@@ -126,9 +126,19 @@ def render_trace(trace: dict) -> str:
     return "\n".join(parts)
 
 
-def build_prompt(trace: dict, readout: str) -> list[dict]:
+VARIANTS = {"neutral": JUDGE_SYSTEM, "primed": JUDGE_SYSTEM_PRIMED}
+
+
+def build_prompt(trace: dict, readout: str, variant: str = "neutral") -> list[dict]:
+    """Build the judge prompt. `variant` selects the shared framing.
+
+    "primed" reproduces the rejected prompt, kept runnable so the instrument
+    -validation comparison on the poster is reproducible rather than anecdotal.
+    """
     if readout not in INSTRUCTIONS:
         raise ValueError(f"unknown readout {readout!r}")
+    if variant not in VARIANTS:
+        raise ValueError(f"unknown prompt variant {variant!r}")
     user = (f"{render_trace(trace)}\n\n=== YOUR TASK ===\n{INSTRUCTIONS[readout]}")
-    return [{"role": "system", "content": JUDGE_SYSTEM},
+    return [{"role": "system", "content": VARIANTS[variant]},
             {"role": "user", "content": user}]

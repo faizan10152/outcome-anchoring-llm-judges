@@ -19,3 +19,5 @@ venv/
 # Poster working files (large binaries)
 poster/*.png
 poster/*.tiff
+poster/preview*.png
+poster/*_strip.png

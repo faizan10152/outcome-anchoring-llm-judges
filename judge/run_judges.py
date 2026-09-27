@@ -85,6 +85,9 @@ def main() -> int:
     ap.add_argument("--readouts", nargs="*", default=jcfg["readouts"])
     ap.add_argument("--out", default=cfg["paths"]["judgments"])
     ap.add_argument("--num-ctx", type=int, default=8192)
+    ap.add_argument("--prompt-variant", choices=["neutral", "primed"], default="neutral",
+                    help="'primed' reproduces the rejected judge prompt for the "
+                         "instrument-validation control")
     args = ap.parse_args()
 
     faulty_dir = ROOT / cfg["paths"]["traces_faulty"]
@@ -133,7 +136,7 @@ def main() -> int:
                     continue
                 trace = json.loads(path.read_text())
                 inj = trace.get("injection", {})
-                messages = build_prompt(trace, readout)
+                messages = build_prompt(trace, readout, args.prompt_variant)
 
                 started = time.time()
                 try:
@@ -159,6 +162,7 @@ def main() -> int:
                     "judge_family": judge["family"],
                     "judge_params_b": judge["params_b"],
                     "readout": readout,
+                    "prompt_variant": args.prompt_variant,
                     "verdict": verdict,
                     # detection = the judge says the agent did NOT handle it correctly
                     "detected": None if verdict is None else (verdict == "no"),
