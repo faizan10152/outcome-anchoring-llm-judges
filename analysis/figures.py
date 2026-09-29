@@ -94,7 +94,7 @@ def fig_discrimination(rows, out: Path):
     fpr = [stats[k][1] * 100 for k in ORDER]
 
     fig, (ax, axd) = plt.subplots(
-        2, 1, figsize=(10.2, 6.15), height_ratios=[1, 0.19])
+        2, 1, figsize=(10.2, 5.7), height_ratios=[1, 0.19])
     x = np.arange(len(ORDER))
     w = 0.38
     ax.bar(x - w / 2 - 0.012, det, w, label="FAULTY traces",
@@ -113,7 +113,7 @@ def fig_discrimination(rows, out: Path):
     ax.set_yticks([0, 25, 50, 75, 100])
     ax.set_yticklabels(["0", "25", "50", "75", "100%"])
     ax.yaxis.grid(True, color=GRID, zorder=0); ax.set_axisbelow(True)
-    ax.set_title("No judge separates faulty from clean traces", pad=38)
+    ax.set_title("Faults reported on faulty vs. clean traces", pad=38)
     ax.legend(loc="lower center", frameon=False, fontsize=16, ncols=2,
               bbox_to_anchor=(0.5, 1.005), handlelength=1.3, columnspacing=2.2)
 
@@ -151,7 +151,7 @@ def fig_fault_outcome_heatmap(rows, out: Path):
         grid.append(row)
     grid = np.array(grid)
 
-    fig, ax = plt.subplots(figsize=(10.2, 6.3))
+    fig, ax = plt.subplots(figsize=(10.2, 5.7))
     for i in range(grid.shape[0]):
         for j in range(grid.shape[1]):
             v = grid[i, j]
@@ -171,7 +171,7 @@ def fig_fault_outcome_heatmap(rows, out: Path):
     ax.tick_params(length=0)
     for j in (2, 4):
         ax.axvline(j, color=INK_MUTED, lw=2)
-    ax.set_title("Detection (%) by fault type and outcome", pad=14)
+    ax.set_title("Detection rate (%) by fault type and outcome", pad=14)
     fig.text(0.015, 0.035,
              "F1 fabricated value   ·   F2 phantom action   ·   F3 skipped check",
              fontsize=16, color=INK_2)
@@ -194,7 +194,7 @@ def fig_anchoring_gap(rows, out: Path):
         labels.append(f"{JUDGE_LABEL[judge]} · {READOUT_LABEL[readout]}")
         gaps.append(g); los.append(lo * 100); his.append(hi * 100); ns.append(len(sel))
 
-    fig, ax = plt.subplots(figsize=(10.2, 5.7))
+    fig, ax = plt.subplots(figsize=(10.2, 5.4))
     y = np.arange(len(labels))[::-1]
     for yi, g, lo, hi in zip(y, gaps, los, his):
         col = BLUE if g >= 0 else RED
@@ -217,7 +217,7 @@ def fig_anchoring_gap(rows, out: Path):
     ax.xaxis.grid(True, color=GRID, zorder=0); ax.set_axisbelow(True)
     ax.spines["left"].set_visible(False); ax.spines["bottom"].set_visible(False)
     ax.tick_params(axis="y", length=0)
-    ax.set_title("H1 not supported: small, inconsistent gaps",
+    ax.set_title("Anchoring gap by judge and readout, 95% CI",
                  pad=14, loc="left", x=0.0)
     fig.text(0.015, 0.055, "gap = detection(wrong) − detection(correct)   ·   "
              "dot = gap   ·   bar = 95% bootstrap CI", fontsize=15, color=INK_2)
@@ -267,7 +267,7 @@ def fig_prompt_effect(primed: Path, neutral: Path, out: Path):
     ax.set_yticklabels(["0", "25", "50", "75", "100%"])
     ax.yaxis.grid(True, color=GRID, zorder=0); ax.set_axisbelow(True)
     ax.set_ylabel("% of traces reported as mishandled", fontsize=17)
-    ax.set_title("A primed judge looks accurate and measures nothing", pad=34)
+    ax.set_title("Effect of judge prompt wording", pad=34)
     ax.legend(loc="lower center", frameon=False, fontsize=16, ncols=2,
               bbox_to_anchor=(0.5, 1.005), handlelength=1.3, columnspacing=2.2)
     fig.text(0.06, 0.028, "All 101 traces (84 faulty, 17 clean), Qwen2.5 7B, "
