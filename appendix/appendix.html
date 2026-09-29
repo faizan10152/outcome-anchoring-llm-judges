@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Appendix</title>
+<style>
+  @page { size: A4; margin: 24mm 22mm 20mm; }
+  :root{ --ink:#111; --ink2:#444; --accent:#123a6b; --rule:#c8c8c8; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Charter","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+        font-size:11pt; line-height:1.45; color:var(--ink); }
+  h1{ font-size:17pt; margin-bottom:1mm; }
+  .meta{ font-size:10.5pt; color:var(--ink2); margin-bottom:6mm;
+         padding-bottom:3mm; border-bottom:0.5mm solid var(--ink); }
+  h2{ font-size:12.5pt; color:var(--accent); margin:7mm 0 3mm;
+      padding-bottom:1mm; border-bottom:0.3mm solid var(--rule); }
+  h3{ font-size:11pt; margin:5mm 0 2mm; }
+  p{ margin-bottom:3mm; text-align:justify; }
+  .ref{ padding-left:8mm; text-indent:-8mm; margin-bottom:2.6mm; text-align:left; }
+  .note{ font-size:10pt; color:var(--ink2); }
+  table{ border-collapse:collapse; width:100%; font-size:10.5pt; margin-bottom:3mm; }
+  th,td{ text-align:left; vertical-align:top; padding:1.8mm 3mm 1.8mm 0;
+         border-bottom:0.3mm solid var(--rule); }
+  th{ font-weight:700; color:var(--ink2); }
+  ul{ margin:0 0 3mm 5mm; }
+  li{ margin-bottom:1.6mm; }
+  .pagebreak{ page-break-before:always; }
+</style>
+</head>
+<body>
+
+<h1>Appendix</h1>
+<div class="meta">
+  Poster: <i>Do LLM judges of agent traces verify the process, or only the final outcome?</i><br>
+  Faizan &middot; Trends in NLP &middot; University of Trier &middot; Examiner: Simon M&uuml;nker<br>
+  Repository: github.com/faizan10152/outcome-anchoring-llm-judges
+</div>
+
+<h2>A. References</h2>
+<p class="note">Every entry, including the complete author list, was checked against the source record on 29 September 2026.</p>
+
+<div class="ref">Advani, L. (2026). <i>From Confident Closing to Silent Failure: Characterizing
+False Success in LLM Agents</i>. arXiv:2606.09863.</div>
+
+<div class="ref">Deshpande, D., Gangal, V., Mehta, H., Krishnan, J., Kannappan, A., &amp; Qian, R.
+(2025). <i>TRAIL: Trace Reasoning and Agentic Issue Localization</i>. arXiv:2505.08638.</div>
+
+<div class="ref">Lightman, H., Kosaraju, V., Burda, Y., Edwards, H., Baker, B., Lee, T., Leike, J.,
+Schulman, J., Sutskever, I., &amp; Cobbe, K. (2023). <i>Let's Verify Step by Step</i>.
+arXiv:2305.20050.</div>
+
+<div class="ref">Liu, Y., Iter, D., Xu, Y., Wang, S., Xu, R., &amp; Zhu, C. (2023). <i>G-Eval: NLG
+Evaluation using GPT-4 with Better Human Alignment</i>. Proceedings of EMNLP 2023.
+arXiv:2303.16634.</div>
+
+<div class="ref">L&ugrave;, X. H., Kazemnejad, A., Meade, N., Patel, A., Shin, D., Zambrano, A.,
+Sta&#324;czak, K., Shaw, P., Pal, C. J., &amp; Reddy, S. (2025). <i>AgentRewardBench: Evaluating
+Automatic Evaluations of Web Agent Trajectories</i>. arXiv:2504.08942.</div>
+
+<div class="ref">Mohammadi, H. (2026). <i>trajectory-judge: measuring what LLM judges miss when an
+agent reaches the right answer the wrong way</i>. Zenodo.
+https://doi.org/10.5281/zenodo.21797927</div>
+
+<div class="ref">Yao, S., Shinn, N., Razavi, P., &amp; Narasimhan, K. (2024).
+<i>&tau;-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</i>.
+arXiv:2406.12045.</div>
+
+<div class="ref">Zhang, S., Yin, M., Zhang, J., Liu, J., Han, Z., Zhang, J., Li, B., Wang, C.,
+Wang, H., Chen, Y., &amp; Wu, Q. (2025). <i>Which Agent Causes Task Failures and When? On
+Automated Failure Attribution of LLM Multi-Agent Systems</i>. Proceedings of ICML 2025
+(spotlight). arXiv:2505.00212.</div>
+
+<div class="ref">Zheng, C., Zhang, Z., Zhang, B., Lin, R., Lu, K., Yu, B., Liu, D., Zhou, J.,
+&amp; Lin, J. (2024). <i>ProcessBench: Identifying Process Errors in Mathematical Reasoning</i>.
+arXiv:2412.06559.</div>
+
+<div class="ref">Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z.,
+Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E., &amp; Stoica, I. (2023). <i>Judging
+LLM-as-a-Judge with MT-Bench and Chatbot Arena</i>. Advances in Neural Information Processing
+Systems 36 (NeurIPS 2023). arXiv:2306.05685.</div>
+
+<div class="ref">Zhuge, M., Zhao, C., Ashley, D., Wang, W., Khizbullin, D., Xiong, Y., Liu, Z.,
+Chang, E., Krishnamoorthi, R., Tian, Y.,
+Shi, Y., Chandra, V., &amp; Schmidhuber, J. (2024).
+<i>Agent-as-a-Judge: Evaluate Agents with Agents</i>. arXiv:2410.10934.</div>
+
+<h3>Software and tools</h3>
+<div class="ref">Ollama (2026). Local inference runtime, version as installed. Model weights:
+Qwen2.5 7B Instruct, Qwen3 14B and Llama 3.1 8B Instruct, obtained through the Ollama
+model library.</div>
+<div class="ref">Python scientific stack: NumPy, pandas, SciPy, statsmodels and Matplotlib.
+Exact versions are pinned in <span style="font-family:monospace">requirements.txt</span> in the
+repository.</div>
+
+<h2>B. Declaration on the use of generative AI tools</h2>
+<p>This section is provided in fulfilment of the requirement in the Declaration of Academic
+Integrity that generative AI tools be indicated with their product name and listed in full in
+an appendix.</p>
+
+<table>
+  <tr><th style="width:34%">Product name</th><th>Where and how it was used</th></tr>
+  <tr>
+    <td>Claude Code (Anthropic), model Claude Opus 5</td>
+    <td>Used as a programming and drafting assistant throughout the project:
+      implementing the task environment, oracle, agent loop, fault injector, judge runner
+      and analysis code; producing the figures; drafting and laying out the poster text;
+      and locating and checking bibliographic records.</td>
+  </tr>
+</table>
+
+<h3>Scope and responsibility</h3>
+<ul>
+  <li>All numerical results reported on the poster were produced by executing the code in the
+      repository against local language models. No result, table or figure value was written
+      or estimated by a generative model.</li>
+  <li>The experimental design, the research question and the three hypotheses were set by the
+      author before implementation.</li>
+  <li>Every bibliographic entry in Section A was verified by the author against the source
+      record; none was accepted on the assistant's assertion alone.</li>
+  <li>The author has read, checked and proofread the whole submission and takes full
+      responsibility for its content, including any passages produced with assistance from the
+      tool named above.</li>
+</ul>
+
+<h3>Reproducibility</h3>
+<p>The repository contains the complete environment, all generated agent traces, all 606 judge
+outputs, the analysis code and the figure scripts, so that every number on the poster can be
+recomputed from the committed data. The full development history, including the assistant's
+contributions, is visible in the commit log.</p>
+
+<h2>C. Declaration of Academic Integrity</h2>
+<p>The signed declaration follows on the next page.</p>
+
+</body>
+</html>

@@ -20,8 +20,9 @@ https://doi.org/10.5281/zenodo.21797927
 Zheng, L., et al. (2023). *Judging LLM-as-a-Judge with MT-Bench and Chatbot
 Arena*. arXiv:2306.05685.
 
-Zhuge, M., et al. (2024). *Agent-as-a-Judge: Evaluate Agents with Agents*.
-arXiv:2410.10934.
+Zhuge, M., Zhao, C., Ashley, D., Wang, W., Khizbullin, D., Xiong, Y., Liu, Z.,
+Chang, E., Krishnamoorthi, R., Tian, Y., Shi, Y., Chandra, V., & Schmidhuber, J.
+(2024). *Agent-as-a-Judge: Evaluate Agents with Agents*. arXiv:2410.10934.
 
 ## Consulted, cited in the appendix only
 
@@ -36,7 +37,8 @@ Alignment*. arXiv:2303.16634.
 Yao, S., et al. (2024). *tau-bench: A Benchmark for Tool-Agent-User Interaction
 in Real-World Domains*. arXiv:2406.12045.
 
-Zhang, S., et al. (2025). *Which Agent Causes Task Failures and When? On
+Zhang, S., Yin, M., Zhang, J., Liu, J., Han, Z., Zhang, J., Li, B., Wang, C.,
+Wang, H., Chen, Y., & Wu, Q. (2025). *Which Agent Causes Task Failures and When? On
 Automated Failure Attribution of LLM Multi-Agent Systems*. arXiv:2505.00212.
 ICML 2025 (spotlight).
 
@@ -51,3 +53,7 @@ Mathematical Reasoning*. arXiv:2412.06559.
 - The tau-bench title uses a Greek tau in the original.
 - Mohammadi (2026) is the closest prior work and is cited on the poster so the
   contribution can be differentiated from it.
+
+- Full author lists were checked one by one, not just first authors. Two entries
+  drafted from memory were wrong before that check: Zhuge et al. had five invented
+  co-authors, and the last author of Zhang et al. is Qingyun Wu, not Wang.

@@ -21,3 +21,6 @@ poster/*.png
 poster/*.tiff
 poster/preview*.png
 poster/*_strip.png
+appendix/ap_*.png
+appendix/declaration_signed.pdf
+submission/
