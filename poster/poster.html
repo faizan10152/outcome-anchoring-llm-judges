@@ -26,7 +26,7 @@
   .byline{ text-align:right; font-size:22pt; color:var(--ink2); line-height:1.42; white-space:nowrap; }
   .byline b{ color:var(--ink); }
 
-  .upper{ display:grid; grid-template-columns:252mm minmax(0,1fr); gap:12mm; height:207mm; }
+  .upper{ display:grid; grid-template-columns:264mm minmax(0,1fr); gap:11mm; height:207mm; }
   section{ display:flex; flex-direction:column; min-height:0; overflow:hidden; }
   h2{ font-size:25pt; font-weight:700; letter-spacing:1.6pt; text-transform:uppercase;
       color:var(--accent); margin-bottom:3mm; padding-bottom:1.5mm;
@@ -37,7 +37,7 @@
   .hyps{ margin:1mm 0 2.6mm; }
   .hyps div{ margin-bottom:1.8mm; padding-left:13mm; text-indent:-13mm; }
   .hyps b{ color:var(--accent); }
-  .rw{ font-size:22.5pt; color:var(--ink2); }
+  .rw{ font-size:24pt; color:var(--ink2); }
   .rw b{ color:var(--ink2); }
 
   .methodgrid{ display:grid; grid-template-columns:minmax(0,1fr) 236mm; gap:10mm; flex:1; min-height:0; }
@@ -83,29 +83,29 @@
 <div class="upper">
   <section>
     <h2><span class="n">1</span>Hypothesis</h2>
-    <p>LLM judges grade agents, and increasingly train them as reward signals. A judge that scores the final answer rather than the work behind it rewards an agent that fabricates its steps yet reaches the right number.</p>
+    <p>LLM judges are widely used to evaluate agent behaviour (Zheng et al., 2023; Zhuge et al., 2024) and increasingly as training signals. A judge that scores the final answer rather than the work behind it rewards an agent that fabricates its steps yet reaches the right number.</p>
     <p><span class="q">Research question.</span> Do judges detect faults in an agent's process independently of whether its final answer is correct?</p>
     <div class="hyps">
       <div><b>H1.</b> Faults are detected less often when the final answer is correct.</div>
       <div><b>H2.</b> Invented values and unperformed lookups are caught less often than omitted checks.</div>
       <div><b>H3.</b> Reasoning before deciding reduces any such gap.</div>
     </div>
-    <p class="rw"><b>Related work.</b> TRAIL (Deshpande et al., 2025) and AgentRewardBench (Lù et al., 2025) report that judges overlook agent errors, but they compare different traces, so the cause cannot be isolated. Lightman et al. (2023) separate process from outcome supervision. This study adds the missing counterfactual: two traces alike in every respect but the final answer.</p>
+    <p class="rw"><b>Related work.</b> TRAIL (Deshpande et al., 2025) and AgentRewardBench (Lù et al., 2025) find that judges overlook agent errors; Mohammadi (2026) groups faults by whether the outcome survived. All compare different traces, so the cause cannot be isolated. This study adds the counterfactual: traces alike but for the final answer.</p>
   </section>
 
   <section>
     <h2><span class="n">2</span>Methodology</h2>
     <div class="methodgrid">
       <div>
-        <p><span class="q">Task environment.</span> An agent settles travel expense claims. The result is a single amount, so correctness is unambiguous. The environment holds 12 employees, 36 trips and 299 expense items under four rules, with six tools. A separate program computes the true amount.</p>
-        <p><span class="q">Traces.</span> An open agent (Qwen3 14B) works through each claim in writing. A trace is kept only if its amount matches the true amount <i>and</i> it passes a process check. That check matters: one run reached the exact right amount while its four calls to the calculator held no arithmetic at all.</p>
+        <p><span class="q">Task environment.</span> An agent settles travel expense claims. The result is a single amount, so correctness is unambiguous. It holds 12 employees, 36 trips and 299 expense items under four rules, with six tools. A separate program computes the true amount.</p>
+        <p><span class="q">Traces.</span> An open agent (Qwen3 14B) works through each claim in writing. A trace is kept only if its amount matches the true amount <i>and</i> it passes a process check. One run reached the exact right amount while its four calls to the calculator held no arithmetic at all.</p>
         <p><span class="q">Injected faults.</span> Each kept trace receives exactly one fault, at a recorded step:</p>
         <dl>
           <dt>F1</dt><dd>an invented value: it states an amount no tool returned</dd>
           <dt>F2</dt><dd>an unperformed lookup: a tool call is removed, its claims remain</dd>
           <dt>F3</dt><dd>an omitted check: the policy is never read, its rules still applied</dd>
         </dl>
-        <p><span class="q">Judges.</span> Three open models of different families and sizes review each full transcript under two instructions: decide directly, or reason through the steps first. This gives 606 judgements over 101 traces. No judge is shown the true amount.</p>
+        <p><span class="q">Judges.</span> Three open models of different families and sizes review each transcript under two instructions: decide directly, or reason first. This gives 606 judgements over 101 traces. No judge sees the true amount.</p>
         <p class="repo">Code and data: <span>github.com/faizan10152/outcome-anchoring-llm-judges</span></p>
       </div>
       <div>

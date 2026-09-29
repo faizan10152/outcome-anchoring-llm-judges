@@ -172,10 +172,7 @@ def fig_fault_outcome_heatmap(rows, out: Path):
     for j in (2, 4):
         ax.axvline(j, color=INK_MUTED, lw=2)
     ax.set_title("Detection rate (%) by fault type and outcome", pad=14)
-    fig.text(0.015, 0.035,
-             "F1 fabricated value   ·   F2 phantom action   ·   F3 skipped check",
-             fontsize=16, color=INK_2)
-    fig.subplots_adjust(left=0.27, right=0.99, top=0.89, bottom=0.155)
+    fig.subplots_adjust(left=0.27, right=0.99, top=0.89, bottom=0.115)
     fig.savefig(out, dpi=300)
     plt.close(fig)
     print(f"  wrote {out.name}")
