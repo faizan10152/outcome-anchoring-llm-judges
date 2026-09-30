@@ -25,21 +25,30 @@ ROOT = Path(__file__).resolve().parent.parent
 APPENDIX = ROOT / "appendix"
 
 
-def looks_unsigned(path: Path) -> bool:
-    """Crude check that the form still has empty name and ID fields."""
+def looks_unsigned(path: Path, student_id: str) -> bool:
+    """True if the form still looks blank.
+
+    Text added with a PDF annotation tool is appended to the end of the page
+    text rather than sitting beside the field labels, so checking what follows
+    a label reports a filled form as blank. Looking for the student ID anywhere
+    on the page is both simpler and correct.
+    """
     try:
-        text = PdfReader(str(path)).pages[0].extract_text() or ""
+        page = PdfReader(str(path)).pages[0]
+        text = page.extract_text() or ""
     except Exception:
         return False
-    # The blank form has these labels with nothing after them on the same line.
-    for label in ("Last name, first name:", "Student ID number:"):
-        idx = text.find(label)
-        if idx == -1:
-            continue
-        tail = text[idx + len(label): idx + len(label) + 40].strip()
-        if not tail or tail.startswith(("Student ID", "hereby")):
-            return True
-    return False
+    return student_id.strip() not in text
+
+
+def has_drawn_marks(path: Path) -> bool:
+    """Whether the page carries image objects, which a drawn signature needs."""
+    try:
+        page = PdfReader(str(path)).pages[0]
+        xobj = (page.get("/Resources", {}) or {}).get("/XObject") or {}
+        return len(xobj) > 0
+    except Exception:
+        return False
 
 
 def main() -> int:
@@ -60,12 +69,15 @@ def main() -> int:
             print(f"ERROR: missing {f}", file=sys.stderr)
             return 2
 
-    if looks_unsigned(signed) and not args.allow_unsigned:
-        print(f"ERROR: {signed.name} still looks like the blank form: the name and "
-              f"student ID fields appear empty.\nFill it in, sign it, and re-export. "
+    if looks_unsigned(signed, args.student_id) and not args.allow_unsigned:
+        print(f"ERROR: {signed.name} does not contain the student ID {args.student_id}, "
+              f"so it still looks like the blank form.\nFill it in, sign it, and re-export. "
               f"Use --allow-unsigned only if you have checked it yourself.",
               file=sys.stderr)
         return 3
+    if not has_drawn_marks(signed):
+        print(f"WARNING: {signed.name} has no image objects. If you signed by drawing, "
+              f"check the signature is really on the page.", file=sys.stderr)
 
     # 1. appendix = body + signed declaration
     out_appendix = APPENDIX / "appendix.pdf"
